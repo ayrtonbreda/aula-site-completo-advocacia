@@ -1,0 +1,6 @@
+# Configuração mínima do Supabase CLI para este projeto (só Edge Functions).
+project_id = "wrxpekndmdhddkrwocwy"
+
+[functions.notificar-contato]
+# Chamada pelo gatilho do banco, sem JWT; a função faz a própria validação (id + notificado_em).
+verify_jwt = false

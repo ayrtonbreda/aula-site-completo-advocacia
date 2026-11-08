@@ -117,3 +117,20 @@ O site precisa de duas variáveis, com valores tirados do Supabase (Project Sett
 O comando `npm run build` (que a Vercel roda sozinha a cada deploy) copia o site para `dist/` e gera `dist/js/config.js` com essas variáveis. Se alguma faltar, o build **falha de propósito** e o site no ar continua na versão anterior, sem quebrar.
 
 Para testar localmente: rode `npm run build` e sirva a pasta `dist/` em um servidor local.
+
+## Aviso por e-mail a cada novo contato
+Quando alguém envia o formulário, o banco dispara um gatilho que chama a Edge Function `notificar-contato`. Ela envia um e-mail pelo **Resend** para `adv.ayrtonbreda@gmail.com`, com nome, telefone (e link do WhatsApp), e-mail, assunto e mensagem. Responder o e-mail já responde à pessoa (*reply-to*).
+
+**Configuração (uma vez):**
+1. Crie uma conta grátis em resend.com **com o e-mail adv.ayrtonbreda@gmail.com**.
+2. Em Resend → **API Keys → Create API Key** (permissão *Sending access*). Copie a chave (`re_…`).
+3. Em Supabase → projeto → **Edge Functions → Secrets → Add new secret**: nome `RESEND_API_KEY`, valor = a chave. Não precisa republicar nada.
+
+**Opcional, para enviar de um endereço do seu domínio** (ex.: `site@ayrtonbredaadvogado.com.br`) e para outros destinatários:
+- Verifique o domínio em Resend → **Domains** (registros DNS na Vercel/Registro.br).
+- Crie os secrets `NOTIFY_FROM` (ex.: `Site Ayrton Brêda <site@ayrtonbredaadvogado.com.br>`) e, se quiser, `NOTIFY_TO`.
+- Sem domínio verificado, o Resend só entrega para o e-mail dono da conta, que é exatamente o caso aqui.
+
+**Se um aviso falhar:** a mensagem continua salva no banco, e a coluna `notificado_em` fica vazia. Os erros aparecem em Supabase → Edge Functions → notificar-contato → **Logs**.
+
+**Arquivos:** `supabase/functions/notificar-contato/index.ts` (função), `supabase/migrations/…_notificar_contato_por_email.sql` (gatilho) e `supabase/config.toml`.
