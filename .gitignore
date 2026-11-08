@@ -1,0 +1,12 @@
+# Configuração local do Claude Code (servidor de teste)
+.claude/
+
+# Sistema operacional / editores
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+*.tmp
+
+# Netlify CLI
+.netlify/

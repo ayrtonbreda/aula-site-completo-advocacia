@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ayrtonbreda.adv.br/sitemap.xml
