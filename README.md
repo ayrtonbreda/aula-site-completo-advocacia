@@ -12,9 +12,11 @@ js/main.js            menu mobile, fade-in, ano automático (+ espaço comentado
 assets/fonts/         Libre Caslon Text + Inter (hospedadas no próprio site)
 assets/img/           foto, monograma recortado e imagem de compartilhamento (og-image.jpg)
 assets/*.png          ícones (apple-touch, 192, 512, favicon-32)
-favicon.ico, site.webmanifest, robots.txt, sitemap.xml, netlify.toml
+favicon.ico, site.webmanifest, robots.txt, sitemap.xml
+vercel.json           headers de segurança e cache na Vercel
+.vercelignore         arquivos que ficam no GitHub mas não vão para o site
 ```
-Os arquivos originais (`foto-ayrton.jpg.jpg`, `logo-*.png/jpg`) foram mantidos em `assets/`, mas o site não os usa. Antes de publicar, você pode tirá-los dali e guardar em outro lugar.
+Os arquivos originais (`foto-ayrton.jpg.jpg`, `logo-*.png/jpg`) foram mantidos em `assets/`, mas o site não os usa. O `.vercelignore` impede que eles sejam publicados.
 
 ## Opções de título do hero
 1. **Direito explicado com clareza. Defendido com dedicação.** (em uso)
@@ -24,7 +26,28 @@ Os arquivos originais (`foto-ayrton.jpg.jpg`, `logo-*.png/jpg`) foram mantidos e
 ## Trocar o domínio
 O domínio previsto é `https://ayrtonbreda.adv.br`. Se for outro, use "localizar e substituir" em `index.html`, `privacidade.html`, `sitemap.xml` e `robots.txt`.
 
-## Publicar no Netlify (recomendado)
+## Publicar na Vercel (em uso)
+1. Entre em vercel.com com a sua conta do GitHub.
+2. **Add New… → Project** → importe `ayrtonbreda/aula-site-completo-advocacia`.
+3. Configure assim:
+   - **Framework Preset:** Other
+   - **Root Directory:** `./`
+   - **Build Command:** deixe vazio
+   - **Output Directory:** deixe vazio (padrão)
+   - **Install Command:** deixe vazio
+4. Clique em **Deploy**. Em cerca de 30 s o site fica no ar em um endereço `….vercel.app`.
+5. A partir daí, **cada `git push` na branch `main` publica o site automaticamente**.
+
+### Domínio próprio na Vercel
+1. No projeto, vá em **Settings → Domains → Add** e digite `ayrtonbreda.adv.br`. Aceite a sugestão de também adicionar `www`, redirecionando para o domínio principal.
+2. No Registro.br, em **DNS → Editar zona**, crie os registros que a Vercel mostrar. Normalmente são:
+   - `A` para `ayrtonbreda.adv.br` → `76.76.21.21`
+   - `CNAME` para `www` → `cname.vercel-dns.com`
+
+   Se a tela da Vercel mostrar valores diferentes, use os da tela.
+3. Aguarde a verificação. O HTTPS é gerado sozinho.
+
+## Publicar no Netlify (alternativa)
 1. Crie uma conta em netlify.com.
 2. **Sites → Add new site → Deploy manually** e arraste a pasta inteira do site.
    (Ou conecte um repositório do GitHub, para publicar a cada alteração.)

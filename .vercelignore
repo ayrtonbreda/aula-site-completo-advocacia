@@ -1,0 +1,10 @@
+# Arquivos que ficam no GitHub mas NÃO são publicados no site
+README.md
+netlify.toml
+.claude/
+
+# Originais da marca (o site usa as versões otimizadas em assets/img/)
+assets/foto-ayrton.jpg.jpg
+assets/logo-horizontal.jpg.jpg
+assets/logo-quadrado.jpg.png
+assets/logo-vertical.jpg.png
