@@ -13,8 +13,11 @@ assets/logo-vertical.jpg.png
 skills-lock.json
 
 # Ferramentas de desenvolvimento (não fazem parte do site publicado)
+# package.json fica de fora para a Vercel não rodar npm install (o build não tem dependências)
 node_modules/
 package.json
 package-lock.json
-scripts/
 supabase/
+.env
+.env.*
+dist/

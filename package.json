@@ -3,6 +3,7 @@
   "private": true,
   "description": "Site institucional Ayrton Brêda Advocacia (estático, sem build).",
   "scripts": {
+    "build": "node scripts/build.js",
     "vendor": "node scripts/vendor-supabase.js"
   },
   "dependencies": {

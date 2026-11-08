@@ -13,3 +13,11 @@ desktop.ini
 
 # Dependências (o build do navegador fica em js/vendor/)
 node_modules/
+
+# Variáveis de ambiente locais (nunca versionar)
+.env
+.env.*
+!.env.example
+
+# Saída do build
+dist/

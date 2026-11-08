@@ -32,9 +32,8 @@ O domínio previsto é `https://ayrtonbredaadvogado.com.br`. Se for outro, use "
 3. Configure assim:
    - **Framework Preset:** Other
    - **Root Directory:** `./`
-   - **Build Command:** deixe vazio
-   - **Output Directory:** deixe vazio (padrão)
-   - **Install Command:** deixe vazio
+   - **Build Command / Output Directory / Install Command:** deixe como estão, sem override. O `vercel.json` já define `node scripts/build.js` e a pasta `dist`.
+   - **Environment Variables:** `VITE_SUPABASE_URL` e `VITE_SUPABASE_PUBLISHABLE_KEY` (veja "Variáveis de ambiente e build").
 4. Clique em **Deploy**. Em cerca de 30 s o site fica no ar em um endereço `….vercel.app`.
 5. A partir daí, **cada `git push` na branch `main` publica o site automaticamente**.
 
@@ -83,7 +82,7 @@ O formulário da seção "Contato" grava as mensagens na tabela `contatos` do pr
 
 **Segurança (testada):**
 - Pelo site, o visitante só consegue **inserir** mensagens. Ler, alterar e apagar são bloqueados no banco (RLS e permissões por coluna).
-- A chave em `js/contato.js` é a **chave publicável** (`sb_publishable_…`), feita para ficar no navegador. **Nunca** coloque a chave `secret`/`service_role` no site.
+- A URL e a chave vêm das variáveis de ambiente `VITE_SUPABASE_URL` e `VITE_SUPABASE_PUBLISHABLE_KEY`. Use sempre a **chave publicável** (`sb_publishable_…`), que foi feita para ficar no navegador. O build **recusa** chaves secretas (`sb_secret_…`/`service_role`).
 - O banco recusa mensagens sem consentimento ou sem telefone e e-mail, e tem limites de tamanho.
 - Contra robôs, há um campo-armadilha invisível e um tempo mínimo de preenchimento.
 
@@ -103,4 +102,18 @@ scripts/vendor-supabase.js        copia a biblioteca de node_modules para js/ven
 2. Rode `npm install` e depois `npm run vendor`.
 3. Em `js/contato.js`, atualize `SUPABASE_LIB` com o novo nome do arquivo.
 
-A Vercel **não** roda `npm install`: o site continua estático, e o arquivo de `js/vendor/` é publicado como está.
+
+## Variáveis de ambiente e build
+O site precisa de duas variáveis, com valores tirados do Supabase (Project Settings → API Keys / Data API):
+
+| Variável | Valor |
+|---|---|
+| `VITE_SUPABASE_URL` | `https://SEU-PROJETO.supabase.co` |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | `sb_publishable_…` |
+
+- **No computador:** ficam no arquivo `.env`, que **não** vai para o GitHub. O modelo é o `.env.example`.
+- **Na Vercel:** ficam em **Settings → Environment Variables**, marcadas para *Production* e *Preview*.
+
+O comando `npm run build` (que a Vercel roda sozinha a cada deploy) copia o site para `dist/` e gera `dist/js/config.js` com essas variáveis. Se alguma faltar, o build **falha de propósito** e o site no ar continua na versão anterior, sem quebrar.
+
+Para testar localmente: rode `npm run build` e sirva a pasta `dist/` em um servidor local.

@@ -6,9 +6,12 @@
 (function () {
   'use strict';
 
-  // ---- Configuração (chave PUBLICÁVEL: pode ficar no navegador) ----
-  var SUPABASE_URL = 'https://wrxpekndmdhddkrwocwy.supabase.co';
-  var SUPABASE_KEY = 'sb_publishable_3yjRbLn2rlK7Mmlf7_pD2Q_k822WmEY';
+  // ---- Configuração ----
+  // URL e chave PUBLICÁVEL vêm das variáveis de ambiente VITE_SUPABASE_URL e
+  // VITE_SUPABASE_PUBLISHABLE_KEY, injetadas em js/config.js pelo build (scripts/build.js).
+  var CONFIG = window.SITE_CONFIG || {};
+  var SUPABASE_URL = CONFIG.supabaseUrl;
+  var SUPABASE_KEY = CONFIG.supabaseKey;
   var SUPABASE_LIB = 'js/vendor/supabase-2.119.0.js'; // gerado por: npm run vendor
   var TABELA = 'contatos';
 
@@ -17,6 +20,10 @@
 
   var statusEl = form.querySelector('.form-status');
   var button = form.querySelector('.form-submit');
+
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    if (window.console) console.error('Formulário de contato: configuração do Supabase ausente (js/config.js). Rode "npm run build".');
+  }
   var startedAt = 0;
   var client = null;
   var libPromise = null;
@@ -36,6 +43,7 @@
   }
 
   function getClient() {
+    if (!SUPABASE_URL || !SUPABASE_KEY) return Promise.reject(new Error('config'));
     return loadLib().then(function (sb) {
       if (!client) {
         client = sb.createClient(SUPABASE_URL, SUPABASE_KEY, {
