@@ -1,8 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "echo \"Sem install: a biblioteca do Supabase ja esta em js/vendor\"",
-  "buildCommand": "echo \"Sem build: site estatico\"",
   "cleanUrls": false,
   "trailingSlash": false,
   "headers": [

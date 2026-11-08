@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ayrtonbreda.adv.br/sitemap.xml
+Sitemap: https://ayrtonbredaadvogado.com.br/sitemap.xml

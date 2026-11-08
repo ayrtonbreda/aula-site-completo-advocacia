@@ -24,7 +24,7 @@ Os arquivos originais (`foto-ayrton.jpg.jpg`, `logo-*.png/jpg`) foram mantidos e
 3. Você merece entender o seu caso e ser ouvido.
 
 ## Trocar o domínio
-O domínio previsto é `https://ayrtonbreda.adv.br`. Se for outro, use "localizar e substituir" em `index.html`, `privacidade.html`, `sitemap.xml` e `robots.txt`.
+O domínio previsto é `https://ayrtonbredaadvogado.com.br`. Se for outro, use "localizar e substituir" em `index.html`, `privacidade.html`, `sitemap.xml` e `robots.txt`.
 
 ## Publicar na Vercel (em uso)
 1. Entre em vercel.com com a sua conta do GitHub.
@@ -39,9 +39,9 @@ O domínio previsto é `https://ayrtonbreda.adv.br`. Se for outro, use "localiza
 5. A partir daí, **cada `git push` na branch `main` publica o site automaticamente**.
 
 ### Domínio próprio na Vercel
-1. No projeto, vá em **Settings → Domains → Add** e digite `ayrtonbreda.adv.br`. Aceite a sugestão de também adicionar `www`, redirecionando para o domínio principal.
+1. No projeto, vá em **Settings → Domains → Add** e digite `ayrtonbredaadvogado.com.br`. Aceite a sugestão de também adicionar `www`, redirecionando para o domínio principal.
 2. No Registro.br, em **DNS → Editar zona**, crie os registros que a Vercel mostrar. Normalmente são:
-   - `A` para `ayrtonbreda.adv.br` → `76.76.21.21`
+   - `A` para `ayrtonbredaadvogado.com.br` → `76.76.21.21`
    - `CNAME` para `www` → `cname.vercel-dns.com`
 
    Se a tela da Vercel mostrar valores diferentes, use os da tela.
@@ -51,27 +51,26 @@ O domínio previsto é `https://ayrtonbreda.adv.br`. Se for outro, use "localiza
 1. Crie uma conta em netlify.com.
 2. **Sites → Add new site → Deploy manually** e arraste a pasta inteira do site.
    (Ou conecte um repositório do GitHub, para publicar a cada alteração.)
-3. **Domain management → Add a domain** → digite `ayrtonbreda.adv.br`.
-4. No painel do Registro.br (onde o `.adv.br` é registrado), escolha uma das opções:
+3. **Domain management → Add a domain** → digite `ayrtonbredaadvogado.com.br`.
+4. No painel do Registro.br (onde o domínio `.com.br` é registrado), escolha uma das opções:
    - **Opção A (mais simples):** em "DNS", troque os servidores para os *nameservers* que o Netlify mostrar (ex.: `dns1.p0X.nsone.net`…).
    - **Opção B:** mantenha o DNS do Registro.br e crie os registros:
-     - `A` para `ayrtonbreda.adv.br` → `75.2.60.5`
+     - `A` para `ayrtonbredaadvogado.com.br` → `75.2.60.5`
      - `CNAME` para `www` → `SEU-SITE.netlify.app`
 5. Aguarde a propagação (de minutos a algumas horas). O Netlify gera o HTTPS (Let's Encrypt) sozinho. Ative **Force HTTPS**.
 
 ## Publicar no GitHub Pages
 1. Crie um repositório (ex.: `site`) e envie todos os arquivos para a branch `main`.
 2. **Settings → Pages → Source: Deploy from a branch → main / (root)**.
-3. Em **Custom domain**, digite `ayrtonbreda.adv.br` (isso cria o arquivo `CNAME`).
+3. Em **Custom domain**, digite `ayrtonbredaadvogado.com.br` (isso cria o arquivo `CNAME`).
 4. No Registro.br, crie os registros:
-   - 4 registros `A` para `ayrtonbreda.adv.br` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - 4 registros `A` para `ayrtonbredaadvogado.com.br` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `CNAME` para `www` → `SEU-USUARIO.github.io`
 5. Depois que o domínio validar, marque **Enforce HTTPS**.
 
-> Observação: o `.adv.br` é exclusivo para advogados, e o registro exige o CPF de quem tem inscrição na OAB.
 
 ## Depois de publicar
-- **Google Search Console:** adicione o domínio e envie `https://ayrtonbreda.adv.br/sitemap.xml`.
+- **Google Search Console:** adicione o domínio e envie `https://ayrtonbredaadvogado.com.br/sitemap.xml`.
 - **Perfil da Empresa no Google:** vale a pena criar um perfil como "área de atendimento" (sem endereço público) para Vitória, Vila Velha e Cariacica.
 - **Instagram:** coloque o link do site na bio.
 - Para testar a pré-visualização do link, cole a URL em opengraph.xyz ou no próprio WhatsApp.
