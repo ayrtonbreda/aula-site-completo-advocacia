@@ -10,3 +10,6 @@ desktop.ini
 
 # Netlify CLI
 .netlify/
+
+# Dependências (o build do navegador fica em js/vendor/)
+node_modules/

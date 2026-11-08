@@ -1,0 +1,12 @@
+{
+  "name": "ayrtonbreda-site",
+  "private": true,
+  "description": "Site institucional Ayrton Brêda Advocacia (estático, sem build).",
+  "scripts": {
+    "vendor": "node scripts/vendor-supabase.js"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0"
+  }
+}

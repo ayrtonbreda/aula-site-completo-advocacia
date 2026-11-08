@@ -78,3 +78,30 @@ O domínio previsto é `https://ayrtonbreda.adv.br`. Se for outro, use "localiza
 
 ## Analytics no futuro
 Hoje o site não tem cookies. Se quiser GA4 ou Meta Pixel, siga as instruções comentadas em `index.html` (procure "ANALYTICS") e em `js/main.js`. O banner de consentimento já está pronto, só que comentado. Depois, atualize `privacidade.html`.
+
+## Formulário de contato (Supabase)
+O formulário da seção "Contato" grava as mensagens na tabela `contatos` do projeto Supabase **"Ayrton Brêda Advogado"**. Não há login: qualquer visitante pode enviar.
+
+**Segurança (testada):**
+- Pelo site, o visitante só consegue **inserir** mensagens. Ler, alterar e apagar são bloqueados no banco (RLS e permissões por coluna).
+- A chave em `js/contato.js` é a **chave publicável** (`sb_publishable_…`), feita para ficar no navegador. **Nunca** coloque a chave `secret`/`service_role` no site.
+- O banco recusa mensagens sem consentimento ou sem telefone e e-mail, e tem limites de tamanho.
+- Contra robôs, há um campo-armadilha invisível e um tempo mínimo de preenchimento.
+
+**Onde ver as mensagens:** Supabase → projeto "Ayrton Brêda Advogado" → **Table Editor → contatos**. A coluna `status` (`novo`, `respondido`, `arquivado`) serve para você organizar o atendimento.
+
+**Arquivos:**
+```
+js/contato.js                     lógica do formulário (URL e chave publicável no topo)
+js/vendor/supabase-2.119.0.js     biblioteca @supabase/supabase-js para o navegador
+supabase/migrations/…_contatos.sql  SQL que criou a tabela (histórico)
+package.json / package-lock.json  versões fixas das bibliotecas
+scripts/vendor-supabase.js        copia a biblioteca de node_modules para js/vendor
+```
+
+**Atualizar a biblioteca do Supabase:**
+1. Em `package.json`, troque a versão de `@supabase/supabase-js`.
+2. Rode `npm install` e depois `npm run vendor`.
+3. Em `js/contato.js`, atualize `SUPABASE_LIB` com o novo nome do arquivo.
+
+A Vercel **não** roda `npm install`: o site continua estático, e o arquivo de `js/vendor/` é publicado como está.

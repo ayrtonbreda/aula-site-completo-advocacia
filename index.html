@@ -386,6 +386,79 @@
           <!-- EDITAR (opcional): horário de atendimento, ex.: <br>Segunda a sexta, das 9h às 18h. -->
         </p>
       </div>
+
+      <!-- Formulário: grava as mensagens na tabela "contatos" do Supabase (ver js/contato.js) -->
+      <div class="container form-wrap reveal">
+        <div class="form-card">
+          <h3 id="form-titulo" class="form-title">Prefere deixar uma mensagem?</h3>
+          <p class="form-intro">Preencha os campos abaixo e eu retorno pelo meio que você preferir.</p>
+
+          <form id="form-contato" class="contact-form" novalidate aria-labelledby="form-titulo">
+            <div class="field">
+              <label for="f-nome">Nome <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-nome" name="nome" type="text" autocomplete="name" required minlength="2" maxlength="120" aria-describedby="e-nome">
+              <p class="field-error" id="e-nome" aria-live="polite"></p>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-telefone">WhatsApp ou telefone</label>
+                <input id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="(27) 99999-9999" aria-describedby="h-contato e-telefone">
+                <p class="field-error" id="e-telefone" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="f-email">E-mail</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" maxlength="160" aria-describedby="h-contato e-email">
+                <p class="field-error" id="e-email" aria-live="polite"></p>
+              </div>
+            </div>
+            <p class="field-hint" id="h-contato">Informe pelo menos um: telefone ou e-mail.</p>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-area">Assunto</label>
+                <select id="f-area" name="area">
+                  <option value="Trabalhista">Trabalhista</option>
+                  <option value="Previdenciário">Previdenciário</option>
+                  <option value="Cível e Consumidor">Cível e Consumidor</option>
+                  <option value="Direito Bancário">Direito Bancário</option>
+                  <option value="Outro" selected>Outro / não sei dizer</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-preferencia">Prefiro ser contatado por</label>
+                <select id="f-preferencia" name="preferencia">
+                  <option value="WhatsApp" selected>WhatsApp</option>
+                  <option value="E-mail">E-mail</option>
+                  <option value="Ligação">Ligação</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-mensagem">Conte brevemente o que está acontecendo</label>
+              <textarea id="f-mensagem" name="mensagem" rows="5" maxlength="2000" aria-describedby="h-mensagem"></textarea>
+              <p class="field-hint" id="h-mensagem">Não é preciso enviar documentos agora. Os detalhes podemos tratar na conversa.</p>
+            </div>
+
+            <!-- Campo-armadilha contra robôs: fica invisível para pessoas -->
+            <div class="hp" aria-hidden="true">
+              <label for="f-site">Não preencha este campo</label>
+              <input id="f-site" name="site" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="field field-check">
+              <input id="f-consentimento" name="consentimento" type="checkbox" required aria-describedby="e-consentimento">
+              <label for="f-consentimento">Concordo que meus dados sejam usados apenas para responder a este contato, conforme a <a href="privacidade.html">Política de Privacidade</a>.</label>
+              <p class="field-error" id="e-consentimento" aria-live="polite"></p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg form-submit">Enviar mensagem</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+            <noscript><p class="field-hint">Para usar o formulário, ative o JavaScript. Você também pode falar comigo pelo WhatsApp ou por e-mail.</p></noscript>
+          </form>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -436,5 +509,6 @@
        ============================================================ -->
 
   <script src="js/main.js" defer></script>
+  <script src="js/contato.js" defer></script>
 </body>
 </html>

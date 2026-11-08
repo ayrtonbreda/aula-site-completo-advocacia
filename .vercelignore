@@ -11,3 +11,10 @@ assets/logo-vertical.jpg.png
 
 # Lista de skills do agente (não faz parte do site)
 skills-lock.json
+
+# Ferramentas de desenvolvimento (não fazem parte do site publicado)
+node_modules/
+package.json
+package-lock.json
+scripts/
+supabase/
