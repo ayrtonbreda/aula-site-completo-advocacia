@@ -5,8 +5,8 @@
 // Segredos (Supabase → Edge Functions → Secrets):
 //   RESEND_API_KEY   obrigatório — chave da conta no Resend
 //   NOTIFY_TO        opcional    — destinatário (padrão: adv.ayrtonbreda@gmail.com)
-//   NOTIFY_FROM      opcional    — remetente (padrão: onboarding@resend.dev, que só envia
-//                                  para o e-mail dono da conta Resend até você verificar um domínio)
+//   NOTIFY_FROM      opcional    — remetente (padrão: site@ayrtonbredaadvogado.com.br,
+//                                  domínio verificado no Resend com registros DNS na Hostinger)
 //
 // Segurança: a função não confia no conteúdo da chamada. Ela recebe só o id, busca a
 // mensagem no banco com a chave secreta e marca "notificado_em" de forma atômica.
@@ -15,7 +15,7 @@ import { createClient } from 'npm:@supabase/supabase-js@2.119.0'
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? ''
 const NOTIFY_TO = Deno.env.get('NOTIFY_TO') ?? 'adv.ayrtonbreda@gmail.com'
-const NOTIFY_FROM = Deno.env.get('NOTIFY_FROM') ?? 'Site Ayrton Brêda <onboarding@resend.dev>'
+const NOTIFY_FROM = Deno.env.get('NOTIFY_FROM') ?? 'Site Ayrton Brêda <site@ayrtonbredaadvogado.com.br>'
 
 function secretKey(): string {
   try {

@@ -126,10 +126,16 @@ Quando alguém envia o formulário, o banco dispara um gatilho que chama a Edge 
 2. Em Resend → **API Keys → Create API Key** (permissão *Sending access*). Copie a chave (`re_…`).
 3. Em Supabase → projeto → **Edge Functions → Secrets → Add new secret**: nome `RESEND_API_KEY`, valor = a chave. Não precisa republicar nada.
 
-**Opcional, para enviar de um endereço do seu domínio** (ex.: `site@ayrtonbredaadvogado.com.br`) e para outros destinatários:
-- Verifique o domínio em Resend → **Domains** (registros DNS na Vercel/Registro.br).
-- Crie os secrets `NOTIFY_FROM` (ex.: `Site Ayrton Brêda <site@ayrtonbredaadvogado.com.br>`) e, se quiser, `NOTIFY_TO`.
-- Sem domínio verificado, o Resend só entrega para o e-mail dono da conta, que é exatamente o caso aqui.
+**Remetente:** os avisos saem de **"Site Ayrton Brêda" <site@ayrtonbredaadvogado.com.br>**. O domínio foi verificado no Resend (região São Paulo) com estes registros na zona DNS da **Hostinger**:
+
+| Tipo | Nome | Valor |
+|---|---|---|
+| TXT | `resend._domainkey` | chave DKIM gerada pelo Resend (`p=MIGfMA0…`) |
+| CNAME | `rsend` | `rsend-sae1.forge.rmta.net` |
+| CNAME | `send` | `send.forge.rmta.net` |
+| TXT | `_dmarc` | `v=DMARC1; p=none;` |
+
+Não apague esses registros, ou os avisos param de sair. Eles não afetam o site (A `@` e CNAME `www` da Vercel). Para usar outro remetente ou destinatário, crie os secrets `NOTIFY_FROM` e/ou `NOTIFY_TO` em Supabase → Edge Functions → Secrets.
 
 **Se um aviso falhar:** a mensagem continua salva no banco, e a coluna `notificado_em` fica vazia. Os erros aparecem em Supabase → Edge Functions → notificar-contato → **Logs**.
 
